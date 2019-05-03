@@ -18,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import com.contas.util.UtilDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Conta {
@@ -54,11 +55,13 @@ public class Conta {
 		this.parcelas = parcelas;
 		this.statusPagamento = statusPagamento;
 	}
-
+	
+	@JsonIgnore
 	public boolean isPaga() {
 		return this.statusPagamento.getDescricao().equals(StatusPagamento.PAGO.getDescricao()); 
 	}
 	
+	@JsonIgnore
 	public boolean isVencida() {
 		return contaNaoPagaEVencida();
 	}
